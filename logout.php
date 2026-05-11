@@ -1,7 +1,7 @@
 <?php
-session_start();      // بدء الـ session
-session_unset();      // إزالة كل المتغيرات في الـ session
-session_destroy();    // تدمير الـ session بالكامل
-header("Location: index.php"); // إعادة توجيه للصفحة الرئيسية
+session_start();     
+session_unset();     
+session_destroy(); 
+header("Location: index.php");
 exit();
 ?>
