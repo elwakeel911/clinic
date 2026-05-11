@@ -1,6 +1,6 @@
 <?php 
 include('includes/header.php'); 
-include('config.php'); // الاتصال بالداتابيز
+include('config.php');
 ?>
 
 <main>
@@ -11,14 +11,12 @@ include('config.php'); // الاتصال بالداتابيز
 
   <?php
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      // استقبال البيانات من الفورم وحمايتها من SQL Injection
       $name = mysqli_real_escape_string($conn, $_POST['name']);
       $email = mysqli_real_escape_string($conn, $_POST['email']);
       $service = mysqli_real_escape_string($conn, $_POST['service']);
       $date = mysqli_real_escape_string($conn, $_POST['date']);
       $time = mysqli_real_escape_string($conn, $_POST['time']);
-
-      // إدخال البيانات في جدول Appointments
+    
       $sql = "INSERT INTO Appointments (name, email, service, appointment_date, appointment_time) 
               VALUES ('$name', '$email', '$service', '$date', '$time')";
 
