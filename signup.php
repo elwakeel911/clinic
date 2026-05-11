@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('config.php'); // الاتصال بقاعدة البيانات
+include('config.php');
 
 $error = '';
 
@@ -9,11 +9,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email    = trim($_POST['email']);
     $password = trim($_POST['password']);
 
-    // التحقق من الحقول
     if (empty($name) || empty($email) || empty($password)) {
         $error = "Please fill in all fields!";
     } else {
-        // التأكد من أن الإيميل غير موجود مسبقًا
         $stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
@@ -22,15 +20,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($result->num_rows > 0) {
             $error = "Email already registered!";
         } else {
-            // تشفير كلمة المرور
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-            // إدخال المستخدم الجديد
             $stmt = $conn->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
             $stmt->bind_param("sss", $name, $email, $hashedPassword);
 
             if ($stmt->execute()) {
-                // إعادة توجيه مباشر لصفحة login
                 header("Location: login.php");
                 exit();
             } else {
