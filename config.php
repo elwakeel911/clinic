@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = ""; // لو انت مركب password لقاعدة البيانات حطه هنا
+$password = ""; 
 $dbname = "clinic_db";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
